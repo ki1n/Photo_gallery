@@ -1,4 +1,4 @@
-package ru.turev.photogallery.presentation.fragments.photogallery
+package ru.turev.photogallery.presentation.fragments.photo_gallery
 
 import android.os.Bundle
 import android.view.View
