@@ -9,6 +9,8 @@ class PhotoGalleryViewHolder(
     private val binding: ItemPhotoGalleryBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    val item = binding.imgItemPhotoGallery
+
     fun bind(itemPhoto: ItemPhoto) {
         with(binding) {
             Glide.with(imgItemPhotoGallery.context)

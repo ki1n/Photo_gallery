@@ -16,7 +16,7 @@ class PhotoGalleryFragment : BaseFragment<PhotoGalleryViewModel>(R.layout.photo_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvPhotos.adapter = photoAdapter
+        initAdapter()
         viewModel.stateLiveData.observe(viewLifecycleOwner, ::handleState)
     }
 
@@ -27,6 +27,12 @@ class PhotoGalleryFragment : BaseFragment<PhotoGalleryViewModel>(R.layout.photo_
         }
     }
 
+    private fun initAdapter() {
+        binding.rvPhotos.adapter = photoAdapter
+        photoAdapter.onClickListener = {
+            viewModel.onDetailPhotoGalleryScreen(it)
+        }
+    }
 
     companion object {
         fun getInstance() = PhotoGalleryFragment()

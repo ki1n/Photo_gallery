@@ -7,9 +7,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import ru.turev.photogallery.domain.entity.ItemPhoto
 import ru.turev.photogallery.domain.enums.State
-import ru.turev.photogallery.domain.interactor.PhotoInteractor
 import ru.turev.photogallery.domain.repository.PhotoRepository
 import ru.turev.photogallery.presentation.base.BaseViewModel
+import ru.turev.photogallery.presentation.fragments.photo_gallery.detail_photo_gallery.detailPhotoGalleryScreen
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,6 +20,9 @@ class PhotoGalleryViewModel @Inject constructor(
 
     private val _stateLiveData = MutableLiveData<PhotoGalleryView.Model>()
     val stateLiveData: LiveData<PhotoGalleryView.Model> get() = _stateLiveData
+
+    fun onDetailPhotoGalleryScreen(itemPhoto: ItemPhoto) =
+        router.navigateTo(detailPhotoGalleryScreen(itemPhoto))
 
     private var uiState = PhotoGalleryView.Model()
         set(value) {
