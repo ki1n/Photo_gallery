@@ -5,15 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:text="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <include
+        android:id="@+id/appBarPhotoGallerySearch"
+        layout="@layout/app_bar_photo_gallery_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPhotos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBarPhotoGallerySearch"
+        tools:listitem="@layout/item_photo_gallery" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

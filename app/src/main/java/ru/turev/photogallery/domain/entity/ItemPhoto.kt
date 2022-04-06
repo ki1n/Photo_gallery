@@ -14,5 +14,4 @@ data class ItemPhoto(
     val smallS3: String,
     val likes: Int,
     val name: String
-    //  val tagline: String
 ) : Parcelable

@@ -24,8 +24,7 @@ class PhotoGalleryViewModel @Inject constructor(
     private var uiState = PhotoGalleryView.Model()
         set(value) {
             field = value
-            // todo
-            _stateLiveData.value = value
+            _stateLiveData.postValue(value)
         }
 
     private fun getAllPhotos() {
