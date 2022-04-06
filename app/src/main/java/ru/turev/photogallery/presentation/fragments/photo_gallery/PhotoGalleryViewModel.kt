@@ -1,16 +1,16 @@
 package ru.turev.photogallery.presentation.fragments.photo_gallery
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.terrakok.cicerone.Router
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import ru.turev.photogallery.data.network.api.response.PhotoResponse
 import ru.turev.photogallery.domain.entity.ItemPhoto
 import ru.turev.photogallery.domain.enums.State
+import ru.turev.photogallery.domain.interactor.PhotoInteractor
 import ru.turev.photogallery.domain.repository.PhotoRepository
 import ru.turev.photogallery.presentation.base.BaseViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 class PhotoGalleryViewModel @Inject constructor(
@@ -25,25 +25,25 @@ class PhotoGalleryViewModel @Inject constructor(
         set(value) {
             field = value
             // todo
-            _stateLiveData.postValue(value)
+            _stateLiveData.value = value
         }
 
     private fun getAllPhotos() {
         photoRepository.getAllPhotos(1, 20)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            //.compose(loadingSingleCompose())
+            .compose(loadingSingleCompose())
             .subscribe(::handleItems, ::handleError)
-            .also{ disposeOnCleared(it) }
+            .also { disposeOnCleared(it) }
     }
 
 
-    private fun handleItems(items: List<PhotoResponse>) {
+    private fun handleItems(items: List<ItemPhoto>) {
         uiState = PhotoGalleryView.Model(
             items = items,
             error = State.COMPLETE
         )
-        Log.d("qqqq", "items : ${items}")
+        Timber.d("items : $items")
     }
 
     private fun handleError(error: Throwable) {
@@ -51,7 +51,7 @@ class PhotoGalleryViewModel @Inject constructor(
             items = emptyList(),
             error = State.ERROR
         )
-      //  processError(error)
+        processError(error)
     }
 
     init {

@@ -15,6 +15,7 @@ class RepositoryModule {
     @Singleton
     fun provideAllPhotos(
         apiService: ApiService,
-    ): PhotoRepository = PhotoRepositoryImpl(apiService)
+        photoResponseMapper: PhotoResponseMapper
+    ): PhotoRepository = PhotoRepositoryImpl(apiService, photoResponseMapper)
 
 }

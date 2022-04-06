@@ -9,6 +9,7 @@ import ru.turev.photogallery.AppPhotoGallery
 import ru.turev.photogallery.di.module.ActivityModule
 import ru.turev.photogallery.di.module.AppModule
 import ru.turev.photogallery.di.module.FragmentModule
+import ru.turev.photogallery.di.module.InteractorModule
 import ru.turev.photogallery.di.module.MappersModule
 import ru.turev.photogallery.di.module.NavigationModule
 import ru.turev.photogallery.di.module.NetworkModule
@@ -27,7 +28,7 @@ import javax.inject.Singleton
         FragmentModule::class,
         RepositoryModule::class,
         MappersModule::class,
-//        InteractorModule::class,
+     //   InteractorModule::class,
     ]
 )
 interface AppComponent : AndroidInjector<AppPhotoGallery> {

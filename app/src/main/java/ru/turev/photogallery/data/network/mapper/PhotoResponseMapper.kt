@@ -7,20 +7,19 @@ class PhotoResponseMapper {
 
     fun mapToDomain(response: List<PhotoResponse>): List<ItemPhoto> {
         val result = mutableListOf<ItemPhoto>()
-        response.forEach {
-            result.add(
-                ItemPhoto(
-                    id = it.id,
-                    raw = it.urls.raw,
-                    full = it.urls.full,
-                    regular = it.urls.regular,
-                    small = it.urls.small,
-                    thumb = it.urls.thumb,
-                    smallS3 = it.urls.smallS3,
-                    likes = it.likes,
-                    tagline = it.sponsorship.tagline
-                )
+        for (element in response) {
+            val itemPhoto = ItemPhoto(
+                id = element.id,
+                raw = element.urls.raw,
+                full = element.urls.full,
+                regular = element.urls.regular,
+                small = element.urls.small,
+                thumb = element.urls.thumb,
+                smallS3 = element.urls.smallS3,
+                likes = element.likes,
+                name = element.user.name
             )
+            result.add(itemPhoto)
         }
         return result
     }

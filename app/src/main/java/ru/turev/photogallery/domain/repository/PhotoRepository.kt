@@ -6,5 +6,5 @@ import ru.turev.photogallery.domain.entity.ItemPhoto
 
 interface PhotoRepository {
 
-    fun getAllPhotos(page: Int, perPage: Int): Single<List<PhotoResponse>>
+    fun getAllPhotos(page: Int, perPage: Int): Single<List<ItemPhoto>>
 }
