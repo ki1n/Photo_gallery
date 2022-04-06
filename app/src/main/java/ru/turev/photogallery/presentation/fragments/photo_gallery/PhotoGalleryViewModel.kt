@@ -10,6 +10,7 @@ import ru.turev.photogallery.domain.enums.State
 import ru.turev.photogallery.domain.repository.PhotoRepository
 import ru.turev.photogallery.presentation.base.BaseViewModel
 import ru.turev.photogallery.presentation.fragments.photo_gallery.detail_photo_gallery.detailPhotoGalleryScreen
+import ru.turev.photogallery.util.exstension.empty
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -30,8 +31,20 @@ class PhotoGalleryViewModel @Inject constructor(
             _stateLiveData.postValue(value)
         }
 
+    fun onSearchInputUpdate(searchInput: String) {
+        uiState = uiState.copy(searchInput = searchInput, searchInputEmpty = false)
+    }
+
+    fun onSearch() {
+        getSearchPhotos(uiState.searchInput)
+    }
+
+    fun onClear() {
+        uiState = uiState.copy(searchInput = String.empty, searchInputEmpty = true)
+    }
+
     private fun getAllPhotos() {
-        photoRepository.getAllPhotos(1, 20)
+        photoRepository.getAllPhotos(INITIAL_VALUE, STANDARD_QUANTITY)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .compose(loadingSingleCompose())
@@ -39,6 +52,14 @@ class PhotoGalleryViewModel @Inject constructor(
             .also { disposeOnCleared(it) }
     }
 
+    private fun getSearchPhotos(searchInput: String) {
+        photoRepository.getSearchPhotos(searchInput, STANDARD_QUANTITY)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .compose(loadingSingleCompose())
+            .subscribe(::handleItems, ::handleError)
+            .also { disposeOnCleared(it) }
+    }
 
     private fun handleItems(items: List<ItemPhoto>) {
         uiState = PhotoGalleryView.Model(
@@ -58,5 +79,10 @@ class PhotoGalleryViewModel @Inject constructor(
 
     init {
         getAllPhotos()
+    }
+
+    companion object {
+        private const val STANDARD_QUANTITY = 20
+        private const val INITIAL_VALUE = 1
     }
 }

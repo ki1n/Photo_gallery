@@ -17,4 +17,11 @@ class PhotoRepositoryImpl(
             .flatMap {
                 photoResponseMapper.mapToDomain(it).toSingle()
             }
+
+    override fun getSearchPhotos(query: String, perPage: Int): Single<List<ItemPhoto>> =
+        apiService.getSearchPhotos(query, perPage)
+            .flatMap {
+                photoResponseMapper.mapToDomain(it.images).toSingle()
+            }
 }
+

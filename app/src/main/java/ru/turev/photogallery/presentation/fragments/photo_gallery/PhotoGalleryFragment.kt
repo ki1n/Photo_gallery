@@ -2,6 +2,7 @@ package ru.turev.photogallery.presentation.fragments.photo_gallery
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import ru.turev.photogallery.R
 import ru.turev.photogallery.databinding.PhotoGalleryFragmentBinding
 import ru.turev.photogallery.presentation.base.BaseFragment
@@ -17,13 +18,34 @@ class PhotoGalleryFragment : BaseFragment<PhotoGalleryViewModel>(R.layout.photo_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        viewModel.stateLiveData.observe(viewLifecycleOwner, ::handleState)
+        with(binding) {
+            viewModel.stateLiveData.observe(viewLifecycleOwner, ::handleState)
+
+            appBarPhotoGallerySearch.etSearch.doAfterTextChanged { searchInput ->
+                viewModel.onSearchInputUpdate(searchInput.toString())
+            }
+
+            appBarPhotoGallerySearch.imgSearch.setOnClickListener {
+                viewModel.onSearch()
+            }
+
+            appBarPhotoGallerySearch.imgClear.setOnClickListener {
+                viewModel.onClear()
+                appBarPhotoGallerySearch.etSearch.setText("")
+            }
+        }
     }
 
     private fun handleState(state: PhotoGalleryView.Model) {
         with(binding) {
-            // todo тут проверка на ошибки
             photoAdapter.submitList(state.items)
+            if (state.searchInputEmpty) {
+                appBarPhotoGallerySearch.imgClear.visibility = View.VISIBLE
+                appBarPhotoGallerySearch.imgSearch.visibility = View.INVISIBLE
+            } else {
+                appBarPhotoGallerySearch.imgClear.visibility = View.INVISIBLE
+                appBarPhotoGallerySearch.imgSearch.visibility = View.VISIBLE
+            }
         }
     }
 

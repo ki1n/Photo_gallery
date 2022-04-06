@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:background="#F8F8FB">
 
     <ImageView
         android:id="@+id/imgInput"
@@ -27,15 +27,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_image_search_24" />
 
+    <ImageView
+        android:id="@+id/imgClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_8"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_image_clear_24" />
+
     <EditText
         android:id="@+id/etSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_4"
         android:layout_marginVertical="@dimen/dp_8"
+        android:background="@drawable/custom_edit_text"
         android:hint="Search"
         android:inputType="textPersonName"
         android:lines="1"
+        android:minHeight="48dp"
         android:paddingHorizontal="@dimen/dp_8"
         app:layout_constraintBottom_toBottomOf="@+id/imgInput"
         app:layout_constraintEnd_toStartOf="@+id/imgSearch"

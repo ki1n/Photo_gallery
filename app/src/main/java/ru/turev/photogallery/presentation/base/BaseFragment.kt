@@ -52,7 +52,6 @@ abstract class BaseFragment<VM : BaseViewModel>(@LayoutRes contentLayoutId: Int)
         super.onViewCreated(view, savedInstanceState)
         progressDialog()
 
-        //  subscribe(viewModel.errorLiveData) { showError(R.string.error_server) }
         subscribe(viewModel.loadingLiveData, ::showLoading)
     }
 
