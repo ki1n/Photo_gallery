@@ -13,8 +13,14 @@ class PhotoGalleryFragment : BaseFragment<PhotoGalleryViewModel>(R.layout.photo_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.stateLiveData.observe(viewLifecycleOwner, ::handleState)
     }
 
+    private fun handleState(state: PhotoGalleryView.Model) {
+        with(binding) {
+            textView.text = state.items.toString()
+        }
+    }
 
     companion object {
         fun getInstance() = PhotoGalleryFragment()

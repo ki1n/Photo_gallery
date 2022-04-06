@@ -6,7 +6,6 @@ import ru.turev.photogallery.R
 import ru.turev.photogallery.databinding.DetailPhotoGalleryFragmentBinding
 import ru.turev.photogallery.presentation.base.BaseFragment
 import ru.turev.photogallery.presentation.base.binding.viewBinding
-import ru.turev.photogallery.presentation.fragments.photo_gallery.PhotoGalleryFragment
 
 class DetailPhotoGalleryFragment :
     BaseFragment<DetailPhotoGalleryViewModel>(R.layout.detail_photo_gallery_fragment) {

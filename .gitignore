@@ -137,3 +137,5 @@ fastlane/report.xml
 vendor
 Gemfile.lock
 
+/gradle.properties
+

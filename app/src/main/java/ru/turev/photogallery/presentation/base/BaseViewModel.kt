@@ -4,6 +4,7 @@ import androidx.annotation.CallSuper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.SingleTransformer
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -26,6 +27,10 @@ abstract class BaseViewModel : ViewModel() {
         compositeDisposable.clear()
     }
 
+    protected fun Disposable.disposeOn() {
+        this.also(::disposeOnCleared)
+    }
+
     protected fun disposeOnCleared(disposable: Disposable) {
         compositeDisposable.add(disposable)
     }
@@ -44,6 +49,15 @@ abstract class BaseViewModel : ViewModel() {
                 _errorLiveEvent.setValue(Unit)
             }
             else -> _unknownErrorLiveEvent.setValue(Unit)
+        }
+    }
+
+    protected open fun <T> loadingSingleCompose(): SingleTransformer<T, T> {
+        return SingleTransformer { upstream ->
+            upstream
+                .doOnSubscribe { showLoading() }
+                .doOnEvent { _, _ -> hideLoading() }
+                .doOnError { hideLoading() }
         }
     }
 }

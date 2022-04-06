@@ -9,6 +9,7 @@ import ru.turev.photogallery.AppPhotoGallery
 import ru.turev.photogallery.di.module.ActivityModule
 import ru.turev.photogallery.di.module.AppModule
 import ru.turev.photogallery.di.module.FragmentModule
+import ru.turev.photogallery.di.module.MappersModule
 import ru.turev.photogallery.di.module.NavigationModule
 import ru.turev.photogallery.di.module.NetworkModule
 import ru.turev.photogallery.di.module.RepositoryModule
@@ -25,7 +26,7 @@ import javax.inject.Singleton
         ActivityModule::class,
         FragmentModule::class,
         RepositoryModule::class,
-//        MappersModule::class,
+        MappersModule::class,
 //        InteractorModule::class,
     ]
 )
