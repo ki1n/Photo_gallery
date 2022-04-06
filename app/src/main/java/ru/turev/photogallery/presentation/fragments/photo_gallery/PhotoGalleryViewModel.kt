@@ -66,7 +66,6 @@ class PhotoGalleryViewModel @Inject constructor(
             items = items,
             error = State.COMPLETE
         )
-        Timber.d("items : $items")
     }
 
     private fun handleError(error: Throwable) {

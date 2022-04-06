@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.widget.doAfterTextChanged
 import ru.turev.photogallery.R
 import ru.turev.photogallery.databinding.PhotoGalleryFragmentBinding
+import ru.turev.photogallery.domain.enums.State
 import ru.turev.photogallery.presentation.base.BaseFragment
 import ru.turev.photogallery.presentation.base.binding.viewBinding
 import ru.turev.photogallery.presentation.fragments.photo_gallery.adapter.PhotoGalleryAdapter
@@ -45,6 +46,18 @@ class PhotoGalleryFragment : BaseFragment<PhotoGalleryViewModel>(R.layout.photo_
             } else {
                 appBarPhotoGallerySearch.imgClear.visibility = View.INVISIBLE
                 appBarPhotoGallerySearch.imgSearch.visibility = View.VISIBLE
+            }
+
+            if (state.items.isEmpty() && state.error == State.COMPLETE) {
+                appBarPhotoGalleryNull.root.visibility = View.VISIBLE
+            } else {
+                appBarPhotoGalleryNull.root.visibility = View.INVISIBLE
+            }
+
+            if (state.error == State.ERROR && state.items.isEmpty()) {
+                appBarPhotoGalleryError.root.visibility = View.VISIBLE
+            } else {
+                appBarPhotoGalleryError.root.visibility = View.INVISIBLE
             }
         }
     }

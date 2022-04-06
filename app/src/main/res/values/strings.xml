@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Photo gallery</string>
+
+    <string name="photo_null">Извините не удалось найти ничего</string>
+    <string name="photo_error">Упс! что то пошло не так(</string>
+
 </resources>
