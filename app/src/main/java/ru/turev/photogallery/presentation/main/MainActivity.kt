@@ -5,6 +5,7 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import ru.turev.photogallery.R
 import ru.turev.photogallery.databinding.ActivityMainBinding
+import ru.turev.photogallery.navigation.Navigator
 import ru.turev.photogallery.presentation.base.BaseActivity
 import ru.turev.photogallery.presentation.base.binding.viewBinding
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     private val binding by viewBinding(ActivityMainBinding::inflate)
 
-    private val navigator by lazy { AppNavigator(this, R.id.container) }
+    private val navigator : AppNavigator by lazy { Navigator(this, R.id.container) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +31,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
     }
 
     override fun onPause() {
-        super.onPause()
         navigatorHolder.removeNavigator()
+        super.onPause()
     }
 }
